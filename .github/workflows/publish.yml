@@ -30,6 +30,5 @@ jobs:
     - name: Build and push image
       uses: docker/build-push-action@v2
       with:
-        context: .
         push: true
         tags: leo3418/gentoo-stage3-amd64-openjdk:latest
