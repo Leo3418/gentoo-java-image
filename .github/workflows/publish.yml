@@ -32,4 +32,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ github.actor}}/gentoo-stage3-amd64-openjdk:latest
+        tags: leo3418/gentoo-stage3-amd64-openjdk:latest
