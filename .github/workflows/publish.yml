@@ -24,8 +24,17 @@ jobs:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
         password: ${{ github.token }}
+    - name: Ensure repository name is in lower case
+      id: repo_name
+      uses: ASzc/change-string-case-action@v1
+      with:
+        string: ${{ github.actor }}
     - name: Build and push image
       uses: docker/build-push-action@v2
+      env:
+        REPO: ${{ steps.repo_name.outputs.lowercase }}
+        NAME: gentoo-stage3-amd64-java
+        TAG: latest
       with:
         push: true
-        tags: ${{ env.REGISTRY }}/leo3418/gentoo-stage3-amd64-openjdk:latest
+        tags: ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.NAME }}:${{ env.TAG }}
