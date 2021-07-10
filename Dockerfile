@@ -10,5 +10,5 @@ dev-util/japi-compliance-checker \
 
 RUN emerge-webrsync; \
     env USE="headless-awt -png" \
-    emerge --color y --verbose --quiet-build y --oneshot ${ATOMS}; \
+    emerge --color y --verbose --quiet-build --oneshot ${ATOMS}; \
     rm -r /var/db/repos/gentoo
