@@ -8,8 +8,7 @@ of many Java packages pre-installed.
 
 ## Installed Packages
 
-- `dev-java/openjdk-bin:8` with `USE="headless-awt"`
-  - Dependency `media-libs/freetype:2` installed with `USE="-png"`
+- `dev-java/openjdk-bin:8`
 - `dev-java/junit:4`
 - `dev-java/testng`
 - `dev-util/pkgdiff`
