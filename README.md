@@ -8,7 +8,7 @@ of many Java packages pre-installed.
 
 ## Installed Packages
 
-- `dev-java/openjdk-bin:8`
+- `dev-java/openjdk:8`
 - `dev-java/junit:4`
 - `dev-java/testng`
 - `dev-util/pkgdiff`
