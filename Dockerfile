@@ -14,4 +14,4 @@ RUN emerge-webrsync; \
     emerge --color y --verbose --quiet-build --oneshot ${ATOMS}; \
     emerge --color y --depclean dev-java/openjdk-bin:8; \
     eselect java-vm set system openjdk-8; \
-    rm -r /var/db/repos/gentoo
+    rm -r /var/cache/distfiles /var/db/repos/gentoo
