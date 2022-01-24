@@ -8,8 +8,7 @@ dev-util/pkgdiff \
 dev-util/japi-compliance-checker \
 "
 
-RUN mkdir -p /run/lock; \
-    emerge-webrsync; \
+RUN emerge-webrsync; \
     echo "app-text/ghostscript-gpl cups" \
     >> /etc/portage/package.use/0-docker-build; \
     emerge --color y --verbose --quiet-build --oneshot ${ATOMS}; \
