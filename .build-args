@@ -1,0 +1,14 @@
+# A shell script which defines command-line arguments for OCI container image
+# build tools that are necessary for building an image from a Dockerfile in
+# this repository.  This script is mainly intended to be sourced by other
+# scripts; it is not designed to be directly executed.
+
+oci_build_args=(
+    --cap-add=CAP_MKNOD
+    --cap-add=CAP_NET_ADMIN
+    --cap-add=CAP_SYS_ADMIN
+    --cap-add=CAP_SYS_PTRACE
+    --security-opt=label=disable
+    --security-opt=apparmor=unconfined
+    --security-opt=seccomp=unconfined
+)
