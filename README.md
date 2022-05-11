@@ -8,7 +8,8 @@ of many Java packages pre-installed.
 
 ## Installed Packages
 
-- `dev-java/openjdk:8`
+- `dev-java/openjdk-bin:11` (Selected as the system VM)
+- `dev-java/openjdk-bin:8`
 - `dev-java/junit:4`
 - `dev-java/testng`
 - `dev-util/pkgdiff`
@@ -16,22 +17,39 @@ of many Java packages pre-installed.
 
 ## Building This Image
 
-Assuming Docker has been installed, the easiest way to build this image from
-the `Dockerfile` is to run the following command:
+The following tools are supported for building this image from the
+`Dockerfile`:
 
-```console
-# docker build https://github.com/Leo3418/gentoo-java-image.git
-```
+- [Buildah](https://buildah.io/)
+- [Podman](https://podman.io/)
 
-By adding extra options to the `docker build` command and/or modifying the
-`Dockerfile`, this image can be built in different ways.  For more information,
-please refer to the following pages in Docker Documentation:
+Once at least one of the above tools has been installed, run the corresponding
+build script in this repository, with the working directory being the root of
+this repository's working tree, to begin the build process:
 
-- [`docker build` command-line reference][docker-build]
-- [`Dockerfile` reference][dockerfile]
+- Buildah: `./buildah-build.sh`
+- Podman: `./podman-build.sh`
 
-[docker-build]: https://docs.docker.com/engine/reference/commandline/build/
+By modifying the `Dockerfile`, this image can be built in different ways.  For
+more information, please refer to the [`Dockerfile` reference][dockerfile] in
+Docker Documentation.
+
 [dockerfile]: https://docs.docker.com/engine/reference/builder/
+
+### Why Is Docker Not Supported?
+
+Because neither `docker build` nor `docker buildx build` supports the
+[`--cap-add`][docker-run-linux-cap] and
+[`--security-opt`][docker-run-security-opt] options.  Without these options,
+the temporary container created to build the image cannot be granted the
+privileges required by certain packages; as a result, these packages would fail
+to install in the container.
+
+On the other hand, Buildah and `podman build` support these options, which is
+why they can be used to build this image.
+
+[docker-run-linux-cap]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
+[docker-run-security-opt]: https://docs.docker.com/engine/reference/run/#security-configuration
 
 ## Pre-built Image
 

@@ -32,12 +32,23 @@ jobs:
         string: ${{ github.actor }}
     - name: Check out repository
       uses: actions/checkout@v3
+    - name: Get extra arguments for Buildah
+      id: extra_args
+      run: |
+        . ./.build-args
+        # "Separate arguments by newline. Do not use quotes."
+        # https://github.com/redhat-actions/buildah-build/blob/v2/README.md
+        IFS=$'\n'
+        # https://github.community/t/set-output-truncates-multiline-strings
+        extra_args="${oci_build_args[*]}"
+        echo "::set-output name=args::${extra_args//$'\n'/'%0A'}"
     - name: Build image
       id: build_image
       uses: redhat-actions/buildah-build@v2
       with:
         image: ${{ env.NAME }}
         containerfiles: ./Dockerfile
+        extra-args: ${{ steps.extra_args.outputs.args }}
     - name: Push image
       uses: redhat-actions/push-to-registry@v2
       env:
